@@ -1,31 +1,10 @@
-import asyncio
-import logging
-import os
-
-from dotenv import load_dotenv
-from speech_decoding import speach_recognition
-
+# aiogram
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
-from app.handlers import router
+# system
+from config import BOT_TOKEN
 
-load_dotenv()
-bot_token = os.getenv('BOT_TOKEN')
-
-bot = Bot(bot_token, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+bot = Bot(BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
 dp = Dispatcher()
-
-
-async def main():
-    dp.include_router(router)
-    await dp.start_polling(bot)
-
-
-if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
-    try:
-        asyncio.run(main())
-    except KeyboardInterrupt:
-        print('Exit')

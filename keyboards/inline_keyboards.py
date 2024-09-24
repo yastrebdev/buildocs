@@ -12,8 +12,8 @@ action_with_finished_document = InlineKeyboardMarkup(inline_keyboard=[
 ])
 
 create_note = InlineKeyboardMarkup(inline_keyboard=[
-    # [InlineKeyboardButton(text='Отправить фото', callback_data='send_photo')],
-    # [InlineKeyboardButton(text='Отправить voice', callback_data='send_voice')],
-    # [InlineKeyboardButton(text='Отправить текст', callback_data='send_text')],
+    [InlineKeyboardButton(text='Отправить фото', callback_data='send_photo')],
+    [InlineKeyboardButton(text='Отправить voice', callback_data='send_voice')],
+    [InlineKeyboardButton(text='Отправить текст', callback_data='send_text')],
     [InlineKeyboardButton(text='Закончить заметку', callback_data='finish_note')],
 ])
