@@ -1,6 +1,10 @@
 /__pycache__
 /.idea
-/downloads
+/venv
 
 .env
+*.mp3
+*.jpg
+*.ogg
+*.oga
 *.docx
