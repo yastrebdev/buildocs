@@ -9,7 +9,7 @@ from bot import bot
 from states.create_document import CreateDocument, CreateNote, document
 from docx.shared import Cm
 
-from utils.speech_decoding import speach_recognition
+# from utils.speech_decoding import speach_recognition
 
 router = Router()
 
