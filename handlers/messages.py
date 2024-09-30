@@ -1,3 +1,5 @@
+import os
+
 from aiogram import html, Router, F
 from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
@@ -34,6 +36,10 @@ async def send_note_photo(message: Message, state: FSMContext):
         photo = message.photo[-1]
         file_info = await bot.get_file(photo.file_id)
         file_path = file_info.file_path
+
+        if not os.path.exists('downloads/photo'):
+            os.makedirs('downloads/photo')
+
         await bot.download_file(file_path, f"downloads/photo/{photo.file_id}.jpg")
         document.add_picture(f"downloads/photo/{photo.file_id}.jpg", width=Cm(15))
         await message.answer('Вы добавили фотографию.', reply_markup=kb.create_note)
@@ -52,6 +58,8 @@ async def send_note_voice(message: Message, state: FSMContext):
         voice_data = await bot.get_file(file_id)
         file_path = voice_data.file_path
 
+        if not os.path.exists('downloads/voices'):
+            os.makedirs('downloads/voices')
         await bot.download_file(file_path, f'downloads/voices/{file_id}.ogg')
         await message.answer('Подождите, сообщение декодируется...')
 

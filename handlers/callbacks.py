@@ -1,3 +1,5 @@
+import os
+
 from aiogram import Router, F
 from aiogram.types import CallbackQuery
 from aiogram.fsm.context import FSMContext
@@ -52,8 +54,9 @@ async def finish_note(callback: CallbackQuery, state: FSMContext):
     await callback.message.answer('Хотите закончить документ?',
                                   reply_markup=kb.action_with_document)
     await state.clear()
-    delete_files_in_folder('downloads/photo')
-    delete_files_in_folder('downloads/voices')
+    if os.path.exists('downloads/photo') or os.path.exists('downloads/voices'):
+        delete_files_in_folder('downloads/photo')
+        delete_files_in_folder('downloads/voices')
 
 
 @router.callback_query(F.data == 'finished')
@@ -71,7 +74,9 @@ async def finished(callback: CallbackQuery, state: FSMContext):
 
     await callback.message.answer('Сессия завершена')
     await state.clear()
-    delete_files_in_folder('downloads/photo')
-    delete_files_in_folder('downloads/voices')
 
-    await create_document(user_id=user_id, file_path=f'document/{document_name}')
+    if os.path.exists('downloads/photo') or os.path.exists('downloads/voices'):
+        delete_files_in_folder('downloads/photo')
+        delete_files_in_folder('downloads/voices')
+
+    await create_document(user_id=user_id, file_path=f'documents/{document_name}')
